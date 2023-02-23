@@ -1,0 +1,28 @@
+{
+  "name": "employee-tracker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lferg98/employee-tracker.git"
+  },
+  "keywords": [
+    "-"
+  ],
+  "author": "-",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Lferg98/employee-tracker/issues"
+  },
+  "homepage": "https://github.com/Lferg98/employee-tracker#readme",
+  "dependencies": {
+    "console.table": "^0.10.0",
+    "inquirer": "^8.2.4",
+    "mysql2": "^3.1.2"
+  }
+}
