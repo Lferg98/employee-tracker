@@ -24,6 +24,7 @@ function PrintMenuQuestions () {
                 "Add a role",
                 "Add an employee",
                 "Update an employee role",
+                "Exit",
                 ],
         })
         
@@ -72,8 +73,6 @@ const viewAllDepartments = () => {
     });
     PrintMenuQuestions();
 };
-
-
 // View all roles
 const viewAllRoles = () => {
     const query = 'SELECT * FROM department';
@@ -84,11 +83,43 @@ const viewAllRoles = () => {
     PrintMenuQuestions();
 };
 // View all employees
-//const viewAllEmployees = () => {
-    //const query(1)
-//}
-
+const viewAllEmployees = () => {
+    const query = 'SELECT * FROM employee';
+    connection.query(query, (err, res) => {
+        if (err) throw err;
+        console.table(res);
+    })
+    PrintMenuQuestions();
+}
 // Add a department
+const addDepartment = () => { 
+    inquirer
+        .prompt([
+            {
+                type: 'input',
+                name: 'name',
+                message: 'Enter the new department name',
+                validate: nameInput => {
+                    if (nameInput) {
+                        return true;
+                    } else {
+                        return console.log("Entry is invalid, please try again.");
+                    }
+                },
+            },
+        ])
+
+        .then((answers) => {
+        const sql = 'INSERT INTO department (name) VALUES (?)';
+        const params = [answers.name];
+        connection.query(sql, params, (err, results)=> {
+            if (err) throw err;
+                console.log(" Added " + answers.name + " to departments ");
+
+                PrintMenuQuestions
+        });
+    });
+};
 // Add a role
 // Add an employee
 // Update an employee role

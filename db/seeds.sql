@@ -29,6 +29,6 @@ INSERT INTO role (title, salary, department_id) VALUES
 
 
 -- Queries test
-SELECT role.title, employee.last_name, role.title
-FROM employee
-JOIN role ON employee.role_id = role.id;
+--SELECT role.title, employee.last_name, role.title
+--FROM employee
+--JOIN role ON employee.role_id = role.id;
