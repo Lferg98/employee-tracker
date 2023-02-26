@@ -8,7 +8,7 @@ This is a backend application designed to manage a company's employees using `no
 
 [GitHub Repository](https://github.com/Lferg98/employee-tracker)
 
-[Live Demo]()
+[Live Demo](./assets/Video-demo.webm)
 
 ## Installation
 
