@@ -1,13 +1,15 @@
 const mysql = require('mysql2');
 const inquirer = require('inquirer');
 require('console.table');
+const connection = require('./connection')
+
 
 
 
 
 
 // Prompt user to select action
-function PintMenuQuestions () {
+function PrintMenuQuestions () {
     inquirer.prompt({
         
             
@@ -31,28 +33,28 @@ function PintMenuQuestions () {
 
         const { choice } = answers;
 
-        if (choices === 'View all departments') {
+        if (choice === 'View all departments') {
             viewAllDepartments();
         }
-        if (choices === 'View all roles') {
+        if (choice === 'View all roles') {
             viewAllRoles();
         }
-        if (choices === 'View all employees') {
+        if (choice === 'View all employees') {
             viewAllEmployees();
         }
-        if (choices === 'Add a department') {
+        if (choice === 'Add a department') {
             addDepartment();
         }
-        if (choices === 'Add a role') {
+        if (choice === 'Add a role') {
             addRole();
         }
-        if (choices === 'Add an employee') {
+        if (choice === 'Add an employee') {
             addEmployee();
         }
-        if (choices === 'Update an employee role') {
+        if (choice === 'Update an employee role') {
             updateEmployeeRole();
         }
-        if (choices === 'Exit') {
+        if (choice === 'Exit') {
             console.log('Goodbye!')
             exit();
         }
@@ -62,8 +64,30 @@ function PintMenuQuestions () {
 
 // functions remaining to be written:
 // View all departments
+const viewAllDepartments = () => {
+    const query = 'SELECT * FROM department';
+    connection.query(query, (err, res) => {
+        if (err) throw err;
+        console.table(res);
+    });
+    PrintMenuQuestions();
+};
+
+
 // View all roles
+const viewAllRoles = () => {
+    const query = 'SELECT * FROM department';
+    connection.query(query, (err, res) => {
+        if (err) throw err;
+        console.table(res);
+    });
+    PrintMenuQuestions();
+};
 // View all employees
+//const viewAllEmployees = () => {
+    //const query(1)
+//}
+
 // Add a department
 // Add a role
 // Add an employee
@@ -73,7 +97,7 @@ function PintMenuQuestions () {
 
 
 
-
+PrintMenuQuestions();
 
 
 
