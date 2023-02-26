@@ -2,9 +2,7 @@ const mysql = require('mysql2');
 const inquirer = require('inquirer');
 require('console.table');
 const connection = require('./connection')
-
-
-
+// npm .env
 
 
 
@@ -75,7 +73,7 @@ const viewAllDepartments = () => {
 };
 // View all roles
 const viewAllRoles = () => {
-    const query = 'SELECT * FROM department';
+    const query = 'SELECT * FROM roles';
     connection.query(query, (err, res) => {
         if (err) throw err;
         console.table(res);
@@ -116,19 +114,120 @@ const addDepartment = () => {
             if (err) throw err;
                 console.log(" Added " + answers.name + " to departments ");
 
-                PrintMenuQuestions
+                PrintMenuQuestions();
         });
     });
 };
-// Add a role
-// Add an employee
-// Update an employee role
-// Exit
+ //Add a role
+ const addRole = () => {
+     connection.query('SELECT * FROM department', (err, departments) => {
+         if (err) console.log(err);
+         departments = departments.map((department) => {
+             return {
+                 name: department.name,
+                 value: department.id,
+             };
+         });
+         inquirer
+         .prompt([
+            {
+                type: 'input',
+                name: 'newRole',
+                message: 'Enter title of the new role.'
+            },
+            {
+                type: 'input',
+                name: 'salary',
+                message: 'Enter salary of the new role.',
+             },
+             {
+                type: 'input',
+                name: 'department_id',
+                message: 'Select department',
+                choices: departments
+             },
+         ])
+         .then((answers) => {
+            const sql = "INSERT INTO role (title, salary, department_id) VALUES (?,?,?)";
+            const params = [answers.role, answers.salary, answers.department_id]
+            connection.query(sql,params, (err, results)=> {
+                if (err) throw err;
+                console.log(" Added " + answer.role + " to roles!' ");
+
+                PrintMenuQuestions;
+            });
+         })
+     })
+ }
+ //Add an employee
+
+ connection.query("SELECT * FROM role", (err, results) => {
+    if (err) console.log(err);
+    roles = roles.map((role) => {
+        return {
+            name: role.title,
+            value: role.id,
+        };
+    });
+    inquirer
+    .prompt([
+        {
+            type: 'input',
+            name:'firstName',
+            message: 'Enter first name of new employee.'
+        },
+        {
+            type: 'input',
+            name: 'lastName',
+            message: 'Enter last name of new employee.',
+        },
+        {
+            type: 'list',
+            name: 'role',
+            message: 'Enter new employee role.'
+        },
+        {
+            type: 'list',
+            name: 'role',
+            message: 'Enter new employee role.'
+        },
+        {
+            type:'list',
+            name:'manager_id',
+            message: 'select a manager id.',
+            choices: [1, 2, 3, 4, 5, 6, 7]  
+        }
+      
+    ])
+    then((answers)=> {
+        console.log(data.role);
+        connection.query(
+            'INSERT INTO employee SET ?' ,
+            {
+                first_name: data.firstName,
+                local_name: data.lastName,
+                role_id: data.role,
+                manager_id: data.manager_id
+            },
+            (err) => {
+                if (err) throw err;
+                console.log('Updated Employee database.');
+                PrintMenuQuestions();
+            }
+        );
+    });
+
+ });
+
+ //Update an employee role
+ //Exit
 
 
 
 
 PrintMenuQuestions();
+
+
 
 
 
